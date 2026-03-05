@@ -3,78 +3,68 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Puszta: Igaz vagy Hamis? 🌾</title>
+<title>Puszta Kaland 🌾</title>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --grass: #4a7c2f;
-    --grass-light: #6aad42;
-    --earth: #c4914a;
-    --earth-dark: #7a4e1e;
-    --sun: #f7cc3a;
-    --sun-warm: #e89c10;
-    --true-col: #2e7d32;
-    --true-bg: #e8f5e9;
-    --false-col: #c62828;
-    --false-bg: #ffebee;
-    --card-bg: #fffef4;
-    --text-dark: #1e2d0e;
-    --text-mid: #3d5220;
+    --grass: #4a7c2f; --grass-light: #6aad42;
+    --earth: #c4914a; --earth-dark: #7a4e1e;
+    --sun: #f7cc3a; --sun-warm: #e89c10;
+    --water: #3a8fb5;
+    --true-col: #2e7d32; --true-bg: #e8f5e9;
+    --false-col: #c62828; --false-bg: #ffebee;
+    --card-bg: #fffef4; --text-dark: #1e2d0e; --text-mid: #3d5220;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Nunito', sans-serif;
-    min-height: 100vh;
-    background: linear-gradient(160deg, #b8dff0 0%, #cfe89a 50%, #c4914a 100%);
-    color: var(--text-dark);
-    overflow-x: hidden;
-  }
+  body { font-family: 'Nunito', sans-serif; min-height: 100vh; background: linear-gradient(160deg, #b8dff0 0%, #cfe89a 50%, #c4914a 100%); color: var(--text-dark); overflow-x: hidden; }
   .bg-deco { position: fixed; bottom: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
   .blade { position: absolute; bottom: 0; width: 18px; border-radius: 50% 50% 0 0; transform-origin: bottom center; animation: sway 3s ease-in-out infinite alternate; }
-  @keyframes sway { from { transform: rotate(-8deg); } to { transform: rotate(8deg); } }
+  @keyframes sway { from{transform:rotate(-8deg)} to{transform:rotate(8deg)} }
   .sun-fixed { position: fixed; top: 16px; right: 22px; font-size: 2.8rem; z-index: 2; animation: spin 20s linear infinite; filter: drop-shadow(0 0 10px #f7cc3a); }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  #app { position: relative; z-index: 2; max-width: 680px; margin: 0 auto; padding: 16px 14px 70px; }
+  @keyframes spin { to{transform:rotate(360deg)} }
+  #app { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; padding: 16px 14px 70px; }
   header { text-align: center; padding: 28px 10px 14px; }
   header h1 { font-family: 'Baloo 2', cursive; font-size: 2.6rem; font-weight: 800; color: var(--text-dark); text-shadow: 3px 3px 0 var(--sun), 5px 5px 0 var(--earth-dark); line-height: 1.1; }
   header p { margin-top: 6px; font-size: 1rem; color: var(--text-mid); font-weight: 600; }
+  @keyframes cardIn { from{opacity:0;transform:translateY(18px) scale(0.97)} to{opacity:1;transform:none} }
 
-  /* NAME SCREEN */
-  .name-screen {
-    background: var(--card-bg); border-radius: 22px; padding: 36px 28px;
-    border: 2.5px solid #d4c070; box-shadow: 5px 6px 0 #b09030;
-    text-align: center; animation: cardIn 0.4s ease;
-  }
+  /* ── SHARED CARD ── */
+  .card { background: var(--card-bg); border-radius: 22px; padding: 28px 26px 22px; border: 2.5px solid #d4c070; box-shadow: 5px 6px 0 #b09030; animation: cardIn 0.35s cubic-bezier(.4,0,.2,1); }
+
+  /* ── NAME SCREEN ── */
+  .name-screen { text-align: center; }
   .name-screen h2 { font-family: 'Baloo 2', cursive; font-size: 1.7rem; font-weight: 800; color: var(--grass); margin-bottom: 8px; }
   .name-screen p { color: var(--text-mid); font-size: 1rem; margin-bottom: 24px; font-weight: 600; }
-  .name-input {
-    font-family: 'Baloo 2', cursive; font-size: 1.2rem; font-weight: 700;
-    padding: 14px 20px; border-radius: 16px; border: 2.5px solid var(--grass);
-    width: 100%; max-width: 320px; text-align: center; outline: none;
-    color: var(--text-dark); background: #f6ffe0;
-    box-shadow: 2px 3px 0 var(--grass); transition: border-color 0.2s;
-    margin-bottom: 20px; display: block; margin-left: auto; margin-right: auto;
-  }
+  .name-input { font-family: 'Baloo 2', cursive; font-size: 1.2rem; font-weight: 700; padding: 14px 20px; border-radius: 16px; border: 2.5px solid var(--grass); width: 100%; max-width: 320px; text-align: center; outline: none; color: var(--text-dark); background: #f6ffe0; box-shadow: 2px 3px 0 var(--grass); transition: border-color 0.2s; margin-bottom: 20px; display: block; margin-left: auto; margin-right: auto; }
   .name-input:focus { border-color: var(--sun-warm); box-shadow: 2px 3px 0 var(--sun-warm); }
-  .start-btn {
-    font-family: 'Baloo 2', cursive; font-size: 1.2rem; font-weight: 800;
-    padding: 14px 44px; background: var(--grass); color: white;
-    border: none; border-radius: 30px; cursor: pointer;
-    box-shadow: 3px 4px 0 var(--earth-dark); transition: all 0.15s;
-  }
-  .start-btn:hover { background: var(--grass-light); transform: translateY(-2px); }
-  .start-btn:disabled { opacity: 0.5; cursor: default; transform: none; }
 
-  /* TOP BAR */
+  /* ── MAIN MENU ── */
+  .menu-screen { text-align: center; }
+  .menu-screen h2 { font-family: 'Baloo 2', cursive; font-size: 1.6rem; font-weight: 800; color: var(--grass); margin-bottom: 6px; }
+  .menu-screen .welcome { font-size: 1rem; color: var(--text-mid); font-weight: 600; margin-bottom: 28px; }
+  .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  .menu-btn {
+    font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 1.05rem;
+    padding: 22px 14px; border-radius: 20px; border: 3px solid;
+    cursor: pointer; transition: all 0.18s; text-align: center; line-height: 1.4;
+  }
+  .menu-btn .btn-icon { font-size: 2.5rem; display: block; margin-bottom: 8px; }
+  .menu-btn .btn-label { display: block; font-size: 1.1rem; }
+  .menu-btn .btn-sub { display: block; font-size: 0.78rem; font-weight: 600; opacity: 0.75; margin-top: 4px; }
+  .menu-btn.igaz { background: var(--true-bg); color: var(--true-col); border-color: var(--true-col); box-shadow: 3px 4px 0 #1a4f1e; }
+  .menu-btn.igaz:hover { transform: translateY(-3px) scale(1.03); background: #b9f0bc; }
+  .menu-btn.kviz { background: #e8f0ff; color: #1a3a8f; border-color: #3355cc; box-shadow: 3px 4px 0 #1a2a8f; }
+  .menu-btn.kviz:hover { transform: translateY(-3px) scale(1.03); background: #c8d8ff; }
+  .back-btn { font-family: 'Baloo 2', cursive; font-size: 0.95rem; font-weight: 700; background: none; border: 2px solid var(--earth); color: var(--earth-dark); border-radius: 20px; padding: 7px 20px; cursor: pointer; transition: all 0.15s; }
+  .back-btn:hover { background: var(--earth); color: white; }
+
+  /* ── TOP BAR ── */
   .top-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
   .q-counter { font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 1rem; color: var(--grass); white-space: nowrap; min-width: 72px; }
   .prog-wrap { flex: 1; background: rgba(255,255,255,0.45); border-radius: 20px; height: 14px; overflow: hidden; border: 2px solid rgba(74,124,47,0.3); min-width: 60px; }
   .prog-fill { height: 100%; border-radius: 20px; background: linear-gradient(90deg, var(--grass-light), var(--sun)); transition: width 0.5s cubic-bezier(.4,0,.2,1); }
   .score-pill { font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 1rem; background: var(--card-bg); border: 2px solid var(--grass); border-radius: 30px; padding: 4px 14px; color: var(--grass); box-shadow: 2px 2px 0 var(--grass); white-space: nowrap; }
   .timer-pill { font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 1rem; background: #e8f0ff; border: 2px solid #5577cc; border-radius: 30px; padding: 4px 14px; color: #2244aa; box-shadow: 2px 2px 0 #2244aa; white-space: nowrap; }
-
-  /* STREAK PILL */
   .streak-pill { font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 1rem; background: #fff8e0; border: 2px solid var(--sun-warm); border-radius: 30px; padding: 4px 14px; color: var(--earth-dark); box-shadow: 2px 2px 0 var(--sun-warm); white-space: nowrap; transition: background 0.3s, border-color 0.3s, color 0.3s; }
   .streak-pill.pop { animation: streakPop 0.4s cubic-bezier(.4,0,.2,1); }
   @keyframes streakPop { 0%{transform:scale(1)} 40%{transform:scale(1.45) rotate(-6deg)} 70%{transform:scale(0.92) rotate(4deg)} 100%{transform:scale(1) rotate(0)} }
@@ -82,31 +72,40 @@
   .streak-pill.broken { background: #ffe0e0; border-color: var(--false-col); color: var(--false-col); box-shadow: 2px 2px 0 #7a1010; animation: streakBreak 0.45s ease; }
   @keyframes streakBreak { 0%{transform:scale(1)} 30%{transform:scale(1.12) rotate(8deg)} 65%{transform:scale(0.9) rotate(-5deg)} 100%{transform:scale(1) rotate(0)} }
 
-  /* DIFF BADGES */
-  .diff-badge { display: inline-block; border-radius: 20px; padding: 3px 14px; font-family: 'Baloo 2', cursive; font-size: 0.82rem; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 14px; }
+  /* ── DIFF BADGES ── */
+  .diff-badge { display: inline-block; border-radius: 20px; padding: 3px 14px; font-family: 'Baloo 2', cursive; font-size: 0.82rem; font-weight: 800; margin-bottom: 14px; }
   .diff-1 { background: #d4f7c0; color: #2a6010; border: 2px solid #6aad42; }
   .diff-2 { background: #fff3c0; color: #7a5000; border: 2px solid #e89c10; }
   .diff-3 { background: #ffd9c0; color: #7a2800; border: 2px solid #e05c1a; }
 
-  /* QUESTION CARD */
-  .q-card { background: var(--card-bg); border-radius: 22px; padding: 28px 26px 22px; border: 2.5px solid #d4c070; box-shadow: 5px 6px 0 #b09030; animation: cardIn 0.35s cubic-bezier(.4,0,.2,1); }
-  @keyframes cardIn { from { opacity:0; transform: translateY(18px) scale(0.97); } to { opacity:1; transform: none; } }
+  /* ── Q CARD ── */
   .q-number { font-family: 'Baloo 2', cursive; font-size: 0.88rem; font-weight: 700; color: #a08030; margin-bottom: 6px; }
-  .q-text { font-family: 'Baloo 2', cursive; font-size: 1.28rem; font-weight: 700; color: var(--text-dark); line-height: 1.45; margin-bottom: 24px; }
+  .q-text { font-family: 'Baloo 2', cursive; font-size: 1.22rem; font-weight: 700; color: var(--text-dark); line-height: 1.45; margin-bottom: 20px; }
 
-  .answer-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
-  .ans-btn { font-family: 'Baloo 2', cursive; font-size: 1.35rem; font-weight: 800; padding: 18px 10px; border-radius: 18px; border: 3px solid; cursor: pointer; transition: transform 0.13s, box-shadow 0.13s, background 0.13s; display: flex; align-items: center; justify-content: center; gap: 10px; letter-spacing: 0.5px; }
+  /* ── TRUE/FALSE BUTTONS ── */
+  .tf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  .ans-btn { font-family: 'Baloo 2', cursive; font-size: 1.35rem; font-weight: 800; padding: 18px 10px; border-radius: 18px; border: 3px solid; cursor: pointer; transition: transform 0.13s, background 0.13s; display: flex; align-items: center; justify-content: center; gap: 10px; }
   .btn-true  { background: var(--true-bg); color: var(--true-col); border-color: var(--true-col); box-shadow: 3px 4px 0 #1a4f1e; }
   .btn-false { background: var(--false-bg); color: var(--false-col); border-color: var(--false-col); box-shadow: 3px 4px 0 #7a1010; }
-  .ans-btn:hover:not(:disabled) { transform: translateY(-3px) scale(1.04); box-shadow: 4px 7px 0 rgba(0,0,0,0.18); }
+  .ans-btn:hover:not(:disabled) { transform: translateY(-3px) scale(1.04); }
   .ans-btn:disabled { cursor: default; opacity: 0.7; }
   .ans-btn.selected-correct { background: #b9f0bc; transform: scale(1.04); }
   .ans-btn.selected-wrong   { background: #ffb3b3; }
   .ans-btn.reveal-correct   { background: #b9f0bc; }
 
+  /* ── 4-OPTION BUTTONS ── */
+  .opts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+  .opt-btn { font-family: 'Nunito', sans-serif; font-size: 0.97rem; font-weight: 700; padding: 13px 14px; border-radius: 14px; border: 2.5px solid #aac060; background: #f4ffe0; color: var(--text-dark); cursor: pointer; transition: all 0.15s; text-align: left; line-height: 1.35; }
+  .opt-btn:hover:not(:disabled) { background: #fff176; border-color: var(--sun-warm); transform: scale(1.03); }
+  .opt-btn:disabled { cursor: default; }
+  .opt-btn.selected-correct { background: #b9f0bc; border-color: var(--true-col); color: #1a4f1e; }
+  .opt-btn.selected-wrong   { background: #ffb3b3; border-color: var(--false-col); color: #7a0000; }
+  .opt-btn.reveal-correct   { background: #b9f0bc; border-color: var(--true-col); }
+
+  /* ── FEEDBACK ── */
   .feedback { border-radius: 14px; padding: 13px 16px; font-size: 0.97rem; font-weight: 700; line-height: 1.5; margin-bottom: 14px; display: none; }
   .feedback.show { display: block; animation: feedIn 0.25s ease; }
-  @keyframes feedIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+  @keyframes feedIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
   .feedback.correct { background: #d4f7d4; border: 2.5px solid var(--true-col); color: #1a4f1e; }
   .feedback.wrong   { background: #ffe0e0; border: 2.5px solid var(--false-col); color: #7a0000; }
 
@@ -114,33 +113,40 @@
   .next-btn.show { display: block; }
   .next-btn:hover { background: var(--grass-light); transform: translateY(-2px); }
 
-  /* RESULT */
-  .result-screen { background: var(--card-bg); border-radius: 22px; padding: 36px 24px; border: 2.5px solid #d4c070; box-shadow: 5px 6px 0 #b09030; text-align: center; animation: cardIn 0.4s ease; }
+  /* ── RESULT ── */
+  .result-screen { text-align: center; }
   .result-emoji { font-size: 4.5rem; display: block; margin-bottom: 12px; }
   .result-title { font-family: 'Baloo 2', cursive; font-size: 2rem; font-weight: 800; color: var(--grass); margin-bottom: 8px; }
   .result-sub { font-size: 1.05rem; color: var(--text-mid); margin-bottom: 22px; font-weight: 600; }
-  .result-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 16px; }
+  .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
   .stat-box { background: #f4ffe4; border: 2px solid var(--grass-light); border-radius: 14px; padding: 12px 6px; }
   .stat-box.streak-stat { background: #fff8e0; border-color: var(--sun-warm); }
   .stat-box.time-stat { background: #e8f0ff; border-color: #5577cc; }
-  .stat-num { font-family: 'Baloo 2', cursive; font-size: 2rem; font-weight: 800; color: var(--grass); }
+  .stat-num { font-family: 'Baloo 2', cursive; font-size: 1.8rem; font-weight: 800; color: var(--grass); }
   .stat-box.streak-stat .stat-num { color: var(--earth-dark); }
   .stat-box.time-stat .stat-num { color: #2244aa; }
   .stat-lbl { font-size: 0.75rem; color: var(--text-mid); font-weight: 700; }
   .stars { font-size: 2rem; letter-spacing: 4px; margin-bottom: 10px; }
-
   .saving-msg { font-family: 'Baloo 2', cursive; font-size: 1rem; font-weight: 700; color: var(--text-mid); margin-bottom: 16px; min-height: 28px; }
-  .saving-msg.ok { color: var(--true-col); }
+  .saving-msg.ok  { color: var(--true-col); }
   .saving-msg.err { color: var(--false-col); }
-
-  .restart-btn { font-family: 'Baloo 2', cursive; font-size: 1.15rem; font-weight: 800; padding: 14px 44px; background: var(--earth); color: white; border: none; border-radius: 30px; cursor: pointer; box-shadow: 3px 4px 0 var(--earth-dark); transition: all 0.15s; }
+  .result-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .restart-btn { font-family: 'Baloo 2', cursive; font-size: 1.05rem; font-weight: 800; padding: 13px 28px; background: var(--earth); color: white; border: none; border-radius: 30px; cursor: pointer; box-shadow: 3px 4px 0 var(--earth-dark); transition: all 0.15s; }
   .restart-btn:hover { transform: translateY(-2px); background: var(--sun-warm); }
+  .menu-back-btn { font-family: 'Baloo 2', cursive; font-size: 1.05rem; font-weight: 800; padding: 13px 28px; background: var(--grass); color: white; border: none; border-radius: 30px; cursor: pointer; box-shadow: 3px 4px 0 var(--earth-dark); transition: all 0.15s; }
+  .menu-back-btn:hover { transform: translateY(-2px); background: var(--grass-light); }
 
-  @media (max-width: 480px) {
+  /* ── SHARED START BTN ── */
+  .start-btn { font-family: 'Baloo 2', cursive; font-size: 1.2rem; font-weight: 800; padding: 14px 44px; background: var(--grass); color: white; border: none; border-radius: 30px; cursor: pointer; box-shadow: 3px 4px 0 var(--earth-dark); transition: all 0.15s; }
+  .start-btn:hover { background: var(--grass-light); transform: translateY(-2px); }
+  .start-btn:disabled { opacity: 0.5; cursor: default; transform: none; }
+
+  @media(max-width:480px) {
     header h1 { font-size: 2rem; }
-    .q-text { font-size: 1.1rem; }
-    .ans-btn { font-size: 1.15rem; padding: 15px 8px; }
-    .result-grid { grid-template-columns: 1fr 1fr; }
+    .q-text { font-size: 1.05rem; }
+    .ans-btn { font-size: 1.1rem; padding: 14px 8px; }
+    .opts-grid { grid-template-columns: 1fr; }
+    .menu-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -149,8 +155,8 @@
 <div class="sun-fixed">☀️</div>
 <div id="app">
   <header>
-    <h1>🌾 Igaz vagy Hamis?</h1>
-    <p>Puszták és mocsárrétek — 20 állítás, egyre nehezebben!</p>
+    <h1>🌾 Puszta Kaland</h1>
+    <p>Puszták és mocsárrétek — játssz és tanulj!</p>
   </header>
   <div id="gameArea"></div>
 </div>
@@ -158,7 +164,10 @@
 <script>
 const SHEET_URL = "https://script.google.com/macros/s/AKfycbxhBeO23qbXIToArYsiquZxpxlAdidFPtjt23vKW9kP8JbJMZ3cXu6JyhsFza6vl7iH/exec";
 
-const questions = [
+// ═══════════════════════════════════════════
+// IGAZ/HAMIS KÉRDÉSEK (20 db)
+// ═══════════════════════════════════════════
+const tfQuestions = [
   { text: "A puszták az Alföldön is megtalálhatók.", answer: true, diff: 1, explain: "Igen! Az Alföld a puszták egyik legismertebb helyszíne Magyarországon." },
   { text: "A pázsitfűfélék szárát szalmaszárnak nevezzük.", answer: true, diff: 1, explain: "Igen! A szalmaszár belül üreges és hajlékony." },
   { text: "A mezeizsálya lila virágú növény.", answer: true, diff: 1, explain: "Pontosan! A mezeizsálya jellegzetesen lila virágú, illatos gyógynövény." },
@@ -181,16 +190,149 @@ const questions = [
   { text: "A mocsári zsurló minden állat számára mérgező hatású lehet.", answer: true, diff: 3, explain: "Igen! A mocsári zsurló a háziállatok számára mérgező — fontos felismerni a legelőkön." },
 ];
 
+// ═══════════════════════════════════════════
+// KVÍZ KÉRDÉSEK (20 db) — mindennapi élet + ok-okozat
+// ═══════════════════════════════════════════
+const quizQuestions = [
+  // KÖNNYŰ – mindennapi kapcsolatok
+  {
+    text: "A mezeizsálya illatos gyógynövény. Mire használják a mindennapokban?",
+    opts: ["Festékként", "Gyógyteának és fűszernek", "Tüzelőanyagként", "Szigetelőanyagként"],
+    correct: 1, diff: 1,
+    explain: "A mezeizsályát teának és gyógynövényként használják torokfájásra, emésztési problémákra — a konyhában is népszerű fűszer!"
+  },
+  {
+    text: "Az angolperjét a háziállatok szívesen legelik. Miért jó ez a gazdálkodóknak?",
+    opts: ["Mert mérgező a vadállatoknak", "Mert olcsó takarmányt ad", "Mert elijeszti a kártevőket", "Mert vizet tárol"],
+    correct: 1, diff: 1,
+    explain: "Az angolperje kiváló természetes legelő — a gazdák nem kell drága takarmányt vegyenek, ha van elegendő angolperje a legelőn."
+  },
+  {
+    text: "A réti boglárka frissen mérgező. Mit kell tudni erről a legelő állatok szempontjából?",
+    opts: ["Nem kell törődni vele", "Frissen veszélyes, szénában már nem", "Csak a gyökere mérgező", "Télen mérgező, nyáron nem"],
+    correct: 1, diff: 1,
+    explain: "A gazdák tudják: friss réten a boglárkától betegek lehetnek az állatok, de a megszárított szénában már nem jelent veszélyt."
+  },
+  {
+    text: "A puszta talaján kevés a csapadék. Hogyan hat ez a mezőgazdaságra?",
+    opts: ["Könnyebb gabonát termeszteni", "Öntözés nélkül nehéz a gazdálkodás", "A talaj termékenyebb lesz", "Több erdőt lehet telepíteni"],
+    correct: 1, diff: 1,
+    explain: "A száraz pusztai éghajlaton öntözés nélkül nem lehet hatékonyan gazdálkodni — ezért a pusztákon inkább állattenyésztéssel foglalkoznak."
+  },
+  {
+    text: "A mocsári zsurló szárát kovasav teszi érdesé. Mire használták ezt régen?",
+    opts: ["Fonásra", "Edények és fazekak súrolására", "Gyógyteának", "Festéknek"],
+    correct: 1, diff: 1,
+    explain: "A zsurló érdes szárával régen edényeket, fazekakat súroltak — természetes súroló volt, akárcsak a mai dörzsszivacsok!"
+  },
+
+  // KÖZEPES – ok-okozat + mindennapi
+  {
+    text: "Ha egy pusztán megnő a csapadék mennyisége évről évre, mi várható?",
+    opts: ["A pázsitfüvek jobban szaporodnak", "Lassan fák és bokrok telepednek meg", "A talaj kiszárad", "A puszta eltűnik a szélben"],
+    correct: 1, diff: 2,
+    explain: "Ha több csapadék hull, a fák és bokrok is meg tudnak telepedni — a puszta elveszítheti jellegét és erdővé vagy cserjéssé alakulhat."
+  },
+  {
+    text: "A pázsitfűfélék szalmaszára üreges. Milyen emberi találmány hasonlít erre az elvre?",
+    opts: ["A kerék", "Az ivószalma és a bambusz csövek", "A napelem", "A vitorla"],
+    correct: 1, diff: 2,
+    explain: "Az ivószalma és a bambuszból készült csövek ugyanolyan elvű: az üreges, de erős szerkezet rugalmas és könnyű — a természet már rég feltalálta!"
+  },
+  {
+    text: "Ha egy mocsárrétet lecsapolnak (eltávolítják a vizet), mi történik a növényzettel?",
+    opts: ["Gazdagabb lesz a növényzet", "A mocsári növények elpusztulnak, szárazabb fajok jelennek meg", "Semmi nem változik", "Több zsurló nő"],
+    correct: 1, diff: 2,
+    explain: "A mocsárréti növények vízhez szoktak — ha lecsapolják, elpusztulnak. A kiszáradt területen más, szárazságtűrő növények veszik át a helyüket."
+  },
+  {
+    text: "A pusztai növények szél általi beporzása miatt mi jellemző a tavaszi pollenszezonnra a pusztán?",
+    opts: ["Kevés a pollen, mert nincs szél", "Sok pollen repül a levegőben — allergiások számára nehéz időszak", "Csak rovarok terjesztik a pollent", "Nincs pollenszezon"],
+    correct: 1, diff: 2,
+    explain: "A szél által beporzott pázsitfüvek rengeteg apró pollent bocsátanak a levegőbe — ez az allergiások számára tavasszal és nyáron nagy terhelést jelent!"
+  },
+  {
+    text: "Miért telepítenek pázsitfűféléket útrézsűkre, gátak oldalára?",
+    opts: ["Mert szép a látványuk", "Mert bojtos gyökerük erősen rögzíti a talajt, megakadályozza az eróziót", "Mert mérgezők a kártevőkre", "Mert nem kell öntözni őket"],
+    correct: 1, diff: 2,
+    explain: "A pázsitfüvek sűrű, bojtos gyökérzete szorosan összekapcsolja a talajszemcséket — így a csapadék nem mossa el a rézsűt vagy a gát oldalát."
+  },
+
+  // NEHÉZ – összetett ok-okozat + földrajz
+  {
+    text: "Ha egy folyó mentén megszűnik az áradás (pl. gát épül), hogyan változik meg a mocsárrét?",
+    opts: ["Több mocsárrét keletkezik", "A mocsárrét kiszárad, biodiverzitása csökken", "A növényzet gazdagabb lesz", "A zsurló jobban szaporodik"],
+    correct: 1, diff: 3,
+    explain: "A mocsárrétek az áradásoknak köszönhetik nedvességüket. Ha gát épül és megszűnnek az áradások, a talaj kiszárad — a ritka mocsári növény- és állatvilág eltűnhet."
+  },
+  {
+    text: "A klímaváltozás miatt csökken a csapadék a Kárpát-medencében. Hogyan hat ez a pusztákra?",
+    opts: ["A puszták zsugorodnak", "A puszták terjeszkednek, szárazabb területek jönnek létre", "Több mocsárrét keletkezik", "A középhegységek elveszítik erdeiket"],
+    correct: 1, diff: 3,
+    explain: "Kevesebb csapadék → szárazabb talaj → a fák még kevésbé tudnak megtelepedni → a puszta jellegű területek kiterjedhetnek. Ez komoly ökológiai változás!"
+  },
+  {
+    text: "Miért alakulnak ki puszták a középhegységek déli oldalain, de nem az északin?",
+    opts: ["Mert délen több az eső", "Mert a déli oldal a napnak kitett, melegebb és szárazabb", "Mert az emberek délen vágták ki az erdőket", "Mert délen homokos a talaj"],
+    correct: 1, diff: 3,
+    explain: "A déli oldal több napsütést kap → melegebb és gyorsabban párolog a víz → szárazabb a talaj → a fák nem tudnak megtelepedni, pusztai növényzet alakul ki. Ezt nevezzük lejtőkitettségnek."
+  },
+  {
+    text: "Ha egy mezőgazdász felszántja a pusztát és évekig nem gondozza, mi várható?",
+    opts: ["Örökre kopár marad", "A pázsitfüvek visszatelepednek — a puszta regenerálódik", "Erdő nő rajta", "Mocsárrét keletkezik"],
+    correct: 1, diff: 3,
+    explain: "A pázsitfüvek rendkívül szívósak — ha hagyják, gyorsan visszatelepednek a felszántott területre. A puszta természetes állapota így helyreállhat néhány évtized alatt."
+  },
+  {
+    text: "A mocsári zsurló spórákkal szaporodik, nem maggal. Mi ennek az előnye nedves élőhelyen?",
+    opts: ["A spórák jobban bírják a szárazságot", "A spórák könnyűek, messzire repülnek és nedves talajon gyorsan csíráznak", "A spórákat rovarok terjesztik", "A spórák mérgezők a ragadozókra"],
+    correct: 1, diff: 3,
+    explain: "A zsurló apró, könnyű spórái a szél és víz segítségével messzire jutnak, és a nedves, iszapos talajon gyorsan kicsíráznak — tökéletesen alkalmazkodtak a mocsári élethez."
+  },
+  {
+    text: "Egy területen kiszárad a talaj, eltűnnek a mocsári zsurló és réti boglárka állományai. Mi az ok-okozati lánc?",
+    opts: ["Több csapadék → több növény → kiszárad a talaj", "Kevesebb csapadék / lecsapolás → száraz talaj → vízigényes növények elpusztulnak", "Erős szél → növények eltűnnek → talaj kiszárad", "Több állat legel → talaj kiszárad → növények elpusztulnak"],
+    correct: 1, diff: 3,
+    explain: "Ez a klasszikus ok-okozati lánc: a víz eltűnik (szárazság vagy emberi beavatkozás) → a vízhez szokott növények nem tudnak megélni → eltűnnek az adott területről."
+  },
+  {
+    text: "Miért fontos a puszta megőrzése természetvédelmi szempontból?",
+    opts: ["Mert ott épülnek a városok", "Mert ritka élőhely, ahol különleges növény- és állatfajok élnek", "Mert több csapadékot hoz", "Mert akadályozza az árvizet"],
+    correct: 1, diff: 3,
+    explain: "Az őshonos puszták Európában ritka élőhelyek — sok ott élő faj máshol nem fordul elő. Ha elpusztulnak, ezek a fajok is eltűnnek. Ezért védik pl. a Hortobágyot."
+  },
+  {
+    text: "A pázsitfüvek szalmaszára bambuszhoz hasonlóan üreges. Miért erős mégis ez a szerkezet?",
+    opts: ["Mert vastag a fala", "Mert a hengeres üreges cső fizikailag ellenáll a hajlítóerőknek", "Mert tele van vízzel", "Mert fásodott anyagból készül"],
+    correct: 1, diff: 3,
+    explain: "A mérnökök is alkalmazzák ezt: az üreges henger kívülről szinte ugyanolyan erős mint a tömör, de sokkal könnyebb. A pázsitfüvek 'feltalálták' ezt az elvét a természetes szelekció során."
+  },
+  {
+    text: "Ha egy pusztán drasztikusan megnő a legelő állatok száma, mi történik a növényzettel?",
+    opts: ["A pázsitfüvek jobban szaporodnak", "Túllegeltetés miatt a talaj csupasszá válik, erózió indul meg", "A terület erdővé alakul", "A mocsárrétek terjeszkednek"],
+    correct: 1, diff: 3,
+    explain: "A túllegeltetés komoly probléma: ha túl sok állat legel, a növényzet nem tud regenerálódni → kopár talaj → szél és eső elmossa a termőréteget (erózió) → a terület sivatagosodhat."
+  },
+  {
+    text: "A középhegységi déli kitettségű pusztákon miért fontosak a szárölelő levelű pázsitfüvek?",
+    opts: ["Mert szép a látványuk", "Mert a levélhüvely védi és merevíti a szárat a heves szél és napsütés ellen", "Mert több vizet tárolnak", "Mert rovarokat vonzanak"],
+    correct: 1, diff: 3,
+    explain: "A déli kitettségű lejtőkön erős szél és tűző nap van — a szárölelő levél egyszerre védi a szárat a kiszáradástól és merevíti azt a szél ellen. Kettős alkalmazkodás!"
+  },
+];
+
+// ═══════════════════════════════════════════
+// ÁLLAPOT
+// ═══════════════════════════════════════════
 let playerName = '';
+let mode = ''; // 'tf' vagy 'quiz'
 let current = 0, score = 0, streak = 0, bestStreak = 0, answered = false;
 let startTime = 0, timerInterval = null, elapsedSeconds = 0;
 
 function formatTime(s) {
-  const m = Math.floor(s / 60);
-  const sec = s % 60;
+  const m = Math.floor(s / 60), sec = s % 60;
   return (m > 0 ? m + ' perc ' : '') + sec + ' mp';
 }
-
 function streakLabel() {
   if (streak === 0) return '🔥 0';
   if (streak >= 5) return '🔥🔥 ' + streak + '!!!';
@@ -208,156 +350,228 @@ function starsStr(sc, total) {
   if (p >= 0.65) return '⭐⭐';
   return '⭐';
 }
-
-function updateTimerDisplay() {
+function updateTimer() {
   elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
   const el = document.getElementById('timerPill');
   if (el) el.textContent = '⏱ ' + formatTime(elapsedSeconds);
 }
 
+// ═══════════════════════════════════════════
+// KÉPERNYŐK
+// ═══════════════════════════════════════════
 function showNameScreen() {
+  mode = ''; current = 0; score = 0; streak = 0; bestStreak = 0;
+  if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
   document.getElementById('gameArea').innerHTML =
-    '<div class="name-screen">' +
+    '<div class="card name-screen">' +
       '<div style="font-size:3rem;margin-bottom:10px;">🌾</div>' +
       '<h2>Üdvözöllek!</h2>' +
       '<p>Írd be a neved a kezdés előtt!</p>' +
-      '<input class="name-input" id="nameInput" type="text" placeholder="Pl. Kovács Péter" maxlength="40" />' +
-      '<button class="start-btn" id="startBtn" onclick="startGame()" disabled>Kezdjük! 🚀</button>' +
+      '<input class="name-input" id="nameInput" type="text" placeholder="Pl. Kovács Péter" maxlength="40"/>' +
+      '<button class="start-btn" id="startBtn" onclick="goToMenu()" disabled>Tovább →</button>' +
     '</div>';
   const inp = document.getElementById('nameInput');
   inp.addEventListener('input', function() {
     document.getElementById('startBtn').disabled = this.value.trim().length < 2;
   });
   inp.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' && this.value.trim().length >= 2) startGame();
+    if (e.key === 'Enter' && this.value.trim().length >= 2) goToMenu();
   });
   inp.focus();
 }
 
-function startGame() {
+function goToMenu() {
   const inp = document.getElementById('nameInput');
-  playerName = inp ? inp.value.trim() : playerName;
+  if (inp) playerName = inp.value.trim();
   if (playerName.length < 2) return;
-  current = 0; score = 0; streak = 0; bestStreak = 0; answered = false;
+  showMenu();
+}
+
+function showMenu() {
+  document.getElementById('gameArea').innerHTML =
+    '<div class="card menu-screen">' +
+      '<h2>Szia, ' + playerName + '! 👋</h2>' +
+      '<p class="welcome">Melyik játékmódot választod?</p>' +
+      '<div class="menu-grid">' +
+        '<button class="menu-btn igaz" onclick="startGame(\'tf\')">' +
+          '<span class="btn-icon">✅</span>' +
+          '<span class="btn-label">Igaz vagy Hamis?</span>' +
+          '<span class="btn-sub">20 állítás · könnyűtől nehézig</span>' +
+        '</button>' +
+        '<button class="menu-btn kviz" onclick="startGame(\'quiz\')">' +
+          '<span class="btn-icon">🧠</span>' +
+          '<span class="btn-label">Kvíz</span>' +
+          '<span class="btn-sub">20 kérdés · mindennapi élet + ok-okozat</span>' +
+        '</button>' +
+      '</div>' +
+      '<button class="back-btn" onclick="showNameScreen()">← Névcsere</button>' +
+    '</div>';
+}
+
+function startGame(m) {
+  mode = m; current = 0; score = 0; streak = 0; bestStreak = 0; answered = false;
   startTime = Date.now(); elapsedSeconds = 0;
   if (timerInterval) clearInterval(timerInterval);
-  timerInterval = setInterval(updateTimerDisplay, 1000);
+  timerInterval = setInterval(updateTimer, 1000);
   render();
 }
 
+// ═══════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════
 function render() {
   const area = document.getElementById('gameArea');
-  if (current >= questions.length) {
+  const questions = mode === 'tf' ? tfQuestions : quizQuestions;
+  const total = questions.length;
+
+  if (current >= total) {
     if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
-    const pct = Math.round(score / questions.length * 100);
+    const pct = Math.round(score / total * 100);
     let emoji, title, sub;
-    if (pct >= 90) { emoji = '🏆'; title = 'Pusztai mester!'; sub = 'Szinte tökéletes — gratulálunk, ' + playerName + '!'; }
+    if (pct >= 90) { emoji = '🏆'; title = 'Mester szint!'; sub = 'Szinte tökéletes — gratulálunk, ' + playerName + '!'; }
     else if (pct >= 70) { emoji = '🌟'; title = 'Nagyszerű munka!'; sub = 'Nagyon jól ismered az anyagot!'; }
     else if (pct >= 50) { emoji = '🌱'; title = 'Jó kezdet!'; sub = 'Nézd át újra és biztosan jobban megy!'; }
     else { emoji = '🌾'; title = 'Még gyakorolni kell!'; sub = 'Olvasd el a tananyagot és próbáld újra!'; }
 
+    const modeLabel = mode === 'tf' ? 'Igaz/Hamis' : 'Kvíz';
     area.innerHTML =
-      '<div class="result-screen">' +
+      '<div class="card result-screen">' +
         '<span class="result-emoji">' + emoji + '</span>' +
-        '<div class="stars">' + starsStr(score, questions.length) + '</div>' +
+        '<div class="stars">' + starsStr(score, total) + '</div>' +
         '<div class="result-title">' + title + '</div>' +
         '<div class="result-sub">' + sub + '</div>' +
         '<div class="result-grid">' +
-          '<div class="stat-box"><div class="stat-num">' + score + ' / 20</div><div class="stat-lbl">✅ Helyes válasz</div></div>' +
+          '<div class="stat-box"><div class="stat-num">' + score + ' / ' + total + '</div><div class="stat-lbl">✅ Helyes válasz</div></div>' +
           '<div class="stat-box"><div class="stat-num">' + pct + '%</div><div class="stat-lbl">📊 Arány</div></div>' +
           '<div class="stat-box time-stat"><div class="stat-num">' + formatTime(elapsedSeconds) + '</div><div class="stat-lbl">⏱ Idő</div></div>' +
           '<div class="stat-box streak-stat"><div class="stat-num">' + bestStreak + '</div><div class="stat-lbl">🔥 Legjobb sorozat</div></div>' +
         '</div>' +
         '<div class="saving-msg" id="savingMsg">⏳ Eredmény mentése...</div>' +
-        '<button class="restart-btn" onclick="showNameScreen()">🔄 Újra játszom</button>' +
+        '<div class="result-btns">' +
+          '<button class="restart-btn" onclick="startGame(\'' + mode + '\')">🔄 Újra játszom</button>' +
+          '<button class="menu-back-btn" onclick="showMenu()">🏠 Főmenü</button>' +
+        '</div>' +
       '</div>';
 
-    // Save to Google Sheets
-    saveResult(playerName, score, elapsedSeconds, bestStreak);
+    saveResult(playerName, modeLabel, score, total, elapsedSeconds, bestStreak);
     return;
   }
 
   const q = questions[current];
   const [dClass, dLabel] = diffLabel(q.diff);
-  const prog = Math.round((current / questions.length) * 100);
+  const prog = Math.round((current / total) * 100);
   const onFire = streak >= 3;
-  const nextLabel = current + 1 < questions.length ? 'Következő ➡️' : 'Eredmény 🏆';
+  const nextLabel = current + 1 < total ? 'Következő ➡️' : 'Eredmény 🏆';
+
+  let answerHTML = '';
+  if (mode === 'tf') {
+    answerHTML =
+      '<div class="tf-row">' +
+        '<button class="ans-btn btn-true" id="btnTrue" onclick="answerTF(true)">✅ IGAZ</button>' +
+        '<button class="ans-btn btn-false" id="btnFalse" onclick="answerTF(false)">❌ HAMIS</button>' +
+      '</div>';
+  } else {
+    answerHTML = '<div class="opts-grid">';
+    q.opts.forEach(function(o, i) {
+      answerHTML += '<button class="opt-btn" id="opt' + i + '" onclick="answerQuiz(' + i + ')">' + o + '</button>';
+    });
+    answerHTML += '</div>';
+  }
 
   area.innerHTML =
     '<div class="top-bar">' +
-      '<div class="q-counter">' + (current+1) + ' / ' + questions.length + '</div>' +
+      '<div class="q-counter">' + (current+1) + ' / ' + total + '</div>' +
       '<div class="prog-wrap"><div class="prog-fill" style="width:' + prog + '%"></div></div>' +
       '<div class="score-pill">🌟 ' + score + '</div>' +
       '<div class="streak-pill ' + (onFire ? 'on-fire' : '') + '" id="streakPill">' + streakLabel() + '</div>' +
-      '<div class="timer-pill" id="timerPill">⏱ 0 mp</div>' +
+      '<div class="timer-pill" id="timerPill">⏱ ' + formatTime(elapsedSeconds) + '</div>' +
     '</div>' +
-    '<div class="q-card">' +
+    '<div class="card">' +
       '<div class="q-number">📋 ' + (current+1) + '. kérdés — ' + playerName + '</div>' +
       '<span class="diff-badge ' + dClass + '">' + dLabel + '</span>' +
-      '<div class="q-text">"' + q.text + '"</div>' +
-      '<div class="answer-row">' +
-        '<button class="ans-btn btn-true" id="btnTrue" onclick="answer(true)">✅ IGAZ</button>' +
-        '<button class="ans-btn btn-false" id="btnFalse" onclick="answer(false)">❌ HAMIS</button>' +
-      '</div>' +
+      '<div class="q-text">' + q.text + '</div>' +
+      answerHTML +
       '<div class="feedback" id="feedback"></div>' +
       '<button class="next-btn" id="nextBtn" onclick="next()">' + nextLabel + '</button>' +
     '</div>';
   answered = false;
 }
 
-function answer(choice) {
-  if (answered) return;
-  answered = true;
-  const q = questions[current];
-  const correct = choice === q.answer;
+// ═══════════════════════════════════════════
+// VÁLASZOK
+// ═══════════════════════════════════════════
+function handleResult(correct, explain) {
   if (correct) { score++; streak++; if (streak > bestStreak) bestStreak = streak; }
-  else { streak = 0; }
-
-  const btnTrue  = document.getElementById('btnTrue');
-  const btnFalse = document.getElementById('btnFalse');
-  btnTrue.disabled = true; btnFalse.disabled = true;
-  const chosen = choice ? btnTrue : btnFalse;
-  if (correct) { chosen.classList.add('selected-correct'); }
-  else { chosen.classList.add('selected-wrong'); (q.answer ? btnTrue : btnFalse).classList.add('reveal-correct'); }
-
+  else streak = 0;
   const pill = document.getElementById('streakPill');
   if (pill) {
     pill.textContent = streakLabel();
     pill.className = 'streak-pill';
     void pill.offsetWidth;
-    if (!correct) { pill.classList.add('broken'); }
+    if (!correct) pill.classList.add('broken');
     else { if (streak >= 3) pill.classList.add('on-fire'); pill.classList.add('pop'); }
   }
-
   const fb = document.getElementById('feedback');
   let prefix = correct ? '✅ Helyes! ' : '❌ Nem egészen. ';
   if (correct && streak >= 5) prefix = '🔥🔥 ' + streak + ' egymás utáni helyes válasz! ';
   else if (correct && streak >= 3) prefix = '🔥 ' + streak + ' sorozat! ';
   fb.className = 'feedback show ' + (correct ? 'correct' : 'wrong');
-  fb.textContent = prefix + q.explain;
+  fb.textContent = prefix + explain;
   document.getElementById('nextBtn').classList.add('show');
 }
 
-function next() { current++; render(); window.scrollTo({top:0, behavior:'smooth'}); }
+function answerTF(choice) {
+  if (answered) return; answered = true;
+  const q = tfQuestions[current];
+  const correct = choice === q.answer;
+  const btnTrue = document.getElementById('btnTrue');
+  const btnFalse = document.getElementById('btnFalse');
+  btnTrue.disabled = true; btnFalse.disabled = true;
+  const chosen = choice ? btnTrue : btnFalse;
+  if (correct) chosen.classList.add('selected-correct');
+  else { chosen.classList.add('selected-wrong'); (q.answer ? btnTrue : btnFalse).classList.add('reveal-correct'); }
+  handleResult(correct, q.explain);
+}
 
-function saveResult(name, score, time, bestStreak) {
+function answerQuiz(i) {
+  if (answered) return; answered = true;
+  const q = quizQuestions[current];
+  const correct = i === q.correct;
+  for (let j = 0; j < q.opts.length; j++) {
+    const btn = document.getElementById('opt' + j);
+    btn.disabled = true;
+    if (j === i && correct) btn.classList.add('selected-correct');
+    else if (j === i && !correct) btn.classList.add('selected-wrong');
+    else if (j === q.correct) btn.classList.add('reveal-correct');
+  }
+  handleResult(correct, q.explain);
+}
+
+function next() { current++; render(); window.scrollTo({top:0,behavior:'smooth'}); }
+
+// ═══════════════════════════════════════════
+// MENTÉS
+// ═══════════════════════════════════════════
+function saveResult(name, modeLabel, score, total, time, bestStreak) {
   fetch(SHEET_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'text/plain' },
-    body: JSON.stringify({ name: name, score: score, time: formatTime(time), bestStreak: bestStreak })
+    body: JSON.stringify({ name: name, mode: modeLabel, score: score + ' / ' + total, time: formatTime(time), bestStreak: bestStreak })
   })
-  .then(r => r.json())
-  .then(data => {
+  .then(function(r) { return r.json(); })
+  .then(function() {
     const msg = document.getElementById('savingMsg');
     if (msg) { msg.textContent = '✅ Eredmény elmentve a táblázatba!'; msg.className = 'saving-msg ok'; }
   })
-  .catch(() => {
+  .catch(function() {
     const msg = document.getElementById('savingMsg');
     if (msg) { msg.textContent = '⚠️ Mentés nem sikerült — ellenőrizd az internet kapcsolatot.'; msg.className = 'saving-msg err'; }
   });
 }
 
-// grass deco
+// ═══════════════════════════════════════════
+// DÍSZ + INDÍTÁS
+// ═══════════════════════════════════════════
 const deco = document.getElementById('bgDeco');
 const cols = ['#5a8a3c','#4a7c2f','#6aad42','#3d6e25'];
 for (let i = 0; i < 22; i++) {
