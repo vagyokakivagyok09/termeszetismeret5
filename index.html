@@ -97,6 +97,10 @@ header p{margin-top:6px;font-size:.72rem;letter-spacing:.14em;text-transform:upp
 .prog-fill{height:100%;border-radius:20px;background:linear-gradient(90deg,#7c3aed,#22c55e);transition:width 0.5s cubic-bezier(.4,0,.2,1);}
 .score-pill{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.88rem;background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.3);border-radius:20px;padding:3px 11px;color:#a78bfa;white-space:nowrap;}
 .timer-pill{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.88rem;background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.25);border-radius:20px;padding:3px 11px;color:#7dd3fc;white-space:nowrap;}
+.pct-pill{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.88rem;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);border-radius:20px;padding:3px 11px;color:#4ade80;white-space:nowrap;transition:all .3s;}
+.pct-pill.low{background:rgba(244,63,94,.1);border-color:rgba(244,63,94,.25);color:#fb7185;}
+.pass-banner{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.4);color:#4ade80;border-radius:14px;padding:14px 18px;font-size:1rem;font-weight:700;margin-bottom:14px;text-align:center;letter-spacing:.01em;}
+.fail-banner{background:rgba(244,63,94,.08);border:1px solid rgba(244,63,94,.35);color:#fb7185;border-radius:14px;padding:14px 18px;font-size:.92rem;font-weight:600;margin-bottom:14px;text-align:center;line-height:1.55;}
 .streak-pill{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.88rem;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.25);border-radius:20px;padding:3px 11px;color:#fbbf24;white-space:nowrap;transition:all .3s;}
 .streak-pill.pop{animation:streakPop 0.4s cubic-bezier(.4,0,.2,1);}
 @keyframes streakPop{0%{transform:scale(1)}40%{transform:scale(1.45) rotate(-6deg)}70%{transform:scale(0.92) rotate(4deg)}100%{transform:scale(1) rotate(0)}}
@@ -147,7 +151,7 @@ header p{margin-top:6px;font-size:.72rem;letter-spacing:.14em;text-transform:upp
 .check-fill-btn:disabled{opacity:0.4;cursor:default;transform:none;}
 .sort-intro{font-size:.8rem;color:var(--text-mid);font-weight:400;margin-bottom:14px;font-style:italic;background:rgba(255,255,255,.03);border-radius:10px;padding:9px 13px;border:1px solid rgba(255,255,255,.07);letter-spacing:.02em;}
 .sort-list{display:flex;flex-direction:column;gap:8px;margin-bottom:15px;min-height:40px;}
-.sort-item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:12px 15px;font-family:'DM Sans',sans-serif;font-size:.93rem;font-weight:500;color:#e2e8f0;cursor:grab;user-select:none;display:flex;align-items:center;gap:10px;transition:all 0.15s;}
+.sort-item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:12px 15px;font-family:'DM Sans',sans-serif;font-size:.93rem;font-weight:500;color:#e2e8f0;cursor:grab;user-select:none;display:flex;align-items:center;gap:10px;transition:all 0.15s;touch-action:none;}
 .sort-item:active{cursor:grabbing;}
 .sort-item.dragging{opacity:0.4;transform:scale(1.03);border-color:rgba(124,58,237,.5);}
 .sort-item.drag-over{background:rgba(124,58,237,.12);border-color:rgba(124,58,237,.5);}
@@ -164,16 +168,17 @@ header p{margin-top:6px;font-size:.72rem;letter-spacing:.14em;text-transform:upp
 .sort-result.wrong{background:rgba(244,63,94,.1);border:1px solid rgba(244,63,94,.3);color:#fb7185;}
 .cat-intro{font-size:.8rem;color:var(--text-mid);font-weight:400;margin-bottom:14px;font-style:italic;background:rgba(255,255,255,.03);border-radius:10px;padding:9px 13px;border:1px solid rgba(255,255,255,.07);letter-spacing:.02em;}
 .cat-items-pool{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px;padding:10px;background:rgba(255,255,255,.02);border-radius:12px;border:1px dashed rgba(255,255,255,.1);min-height:44px;}
-.cat-item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:9px;padding:7px 13px;font-family:'Space Grotesk',sans-serif;font-size:.85rem;font-weight:600;color:#cbd5e1;cursor:grab;user-select:none;transition:all 0.15s;}
+.cat-item{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:9px;padding:7px 13px;font-family:'Space Grotesk',sans-serif;font-size:.85rem;font-weight:600;color:#cbd5e1;cursor:grab;user-select:none;transition:all 0.15s;touch-action:none;}
 .cat-item:active{cursor:grabbing;}
 .cat-item.dragging{opacity:0.35;transform:scale(1.06);}
 .cat-item.correct-item{background:rgba(34,197,94,.15);border-color:rgba(34,197,94,.4);color:#4ade80;}
 .cat-item.wrong-item{background:rgba(244,63,94,.15);border-color:rgba(244,63,94,.4);color:#fb7185;}
 .cat-boxes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
-.cat-box{border-radius:14px;padding:12px;min-height:90px;border:1px dashed;}
+.cat-box{border-radius:14px;padding:12px;min-height:110px;border:1px dashed;}
 .cat-box.box-yes{background:rgba(34,197,94,.05);border-color:rgba(34,197,94,.25);}
 .cat-box.box-no{background:rgba(244,63,94,.05);border-color:rgba(244,63,94,.25);}
 .cat-box.drag-active{transform:scale(1.02);box-shadow:0 0 0 3px rgba(124,58,237,.35);border-color:rgba(124,58,237,.6)!important;}
+.cat-box-empty-hint{font-size:.72rem;color:#334155;font-style:italic;text-align:center;padding:12px 0;pointer-events:none;user-select:none;}
 .sort-list.drag-over-zone{background:rgba(124,58,237,.04);}
 .cat-box-title{font-family:'Space Grotesk',sans-serif;font-size:.75rem;font-weight:700;margin-bottom:8px;text-align:center;letter-spacing:.04em;}
 .cat-box.box-yes .cat-box-title{color:#4ade80;}
@@ -309,7 +314,7 @@ const BIG_TOPICS = [
         tf:[
           {text:"A puszták az Alföldön is megtalálhatók.",answer:true,diff:1,explain:"Igen! Az Alföld a puszták egyik legismertebb helyszíne Magyarországon."},
           {text:"A pázsitfűfélék szárát szalmaszárnak nevezzük.",answer:true,diff:1,explain:"Igen! A szalmaszár belül üreges és hajlékony."},
-          {text:"A mezeizsálya lila virágú növény.",answer:true,diff:1,explain:"Pontosan! A mezeizsálya jellegzetesen lila virágú, illatos gyógynövény."},
+          {text:"A mezeizsálya lila virágú növény.",answer:true,diff:1,explain:"Pontosan! A mezeizsálya jellegzetesen lila virág��, illatos gyógynövény."},
           {text:"A mocsárrét talaja mindig száraz.",answer:false,diff:1,explain:"Nem igaz! A mocsárrét állandóan nedves talajon alakul ki."},
           {text:"A réti boglárka sárga virágú növény.",answer:true,diff:1,explain:"Igen! Élénksárga, fényes szirmú virágai tavasszal sárgára festik a réteket."},
           {text:"A pázsitfűfélék levelei hosszúak és keskenyek.",answer:true,diff:1,explain:"Igen! A hosszú, keskeny levelek segítenek alkalmazkodni a szeles pusztai körülményekhez."},
@@ -331,7 +336,7 @@ const BIG_TOPICS = [
         quiz:[
           {text:"A mezeizsálya illatos gyógynövény. Mire használják a mindennapokban?",opts:["Festékként","Gyógyteának és fűszernek","Tüzelőanyagként","Szigetelőanyagként"],correct:1,diff:1,explain:"A mezeizsályát teának és gyógynövényként használják torokfájásra, emésztési problémákra."},
           {text:"Az angolperjét a háziállatok szívesen legelik. Miért jó ez a gazdálkodóknak?",opts:["Mert mérgező a vadállatoknak","Mert olcsó takarmányt ad","Mert elijeszti a kártevőket","Mert vizet tárol"],correct:1,diff:1,explain:"Az angolperje kiváló természetes legelő — a gazdák nem kell drága takarmányt vegyenek."},
-          {text:"A réti boglárka frissen mérgező. Mit kell tudni erről a legelő állatok szempontjából?",opts:["Nem kell törődni vele","Frissen veszélyes, szénában már nem","Csak a gyökere mérgező","Télen mérgező, nyáron nem"],correct:1,diff:1,explain:"Friss réten a boglárkától betegek lehetnek az állatok, de a megszárított szénában már nem jelent veszélyt."},
+          {text:"A réti boglárka frissen mérgező. Mit kell tudni erről a legelő állatok szempontjából?",opts:["Nem kell törődni vele","Frissen veszélyes, szénában már nem","Csak a gyökere mérgező","Télen mérgező, nyáron nem"],correct:1,diff:1,explain:"Friss réten a boglárkától betegek lehetnek az állatok, de a megszárított szénában m��r nem jelent veszélyt."},
           {text:"A puszta talaján kevés a csapadék. Hogyan hat ez a mezőgazdaságra?",opts:["Könnyebb gabonát termeszteni","Öntözés nélkül nehéz a gazdálkodás","A talaj termékenyebb lesz","Több erdőt lehet telepíteni"],correct:1,diff:1,explain:"A száraz pusztai éghajlaton öntözés nélkül nem lehet hatékonyan gazdálkodni."},
           {text:"A mocsári zsurló szárát kovasav teszi érdesé. Mire használták ezt régen?",opts:["Fonásra","Edények és fazekak súrolására","Gyógyteának","Festéknek"],correct:1,diff:1,explain:"A zsurló érdes szárával régen edényeket, fazekakat súroltak — természetes súroló volt!"},
           {text:"Ha egy pusztán megnő a csapadék mennyisége, mi várható?",opts:["A pázsitfüvek jobban szaporodnak","Lassan fák és bokrok telepednek meg","A talaj kiszárad","A puszta eltűnik a szélben"],correct:1,diff:2,explain:"Ha több csapadék hull, a fák és bokrok is meg tudnak telepedni — a puszta elveszítheti jellegét."},
@@ -592,8 +597,118 @@ const BIG_TOPICS = [
           {diff:3,question:"Mi jellemző a RAGADOZÓ madarakra és mi NEM?",boxYes:"✅ Ragadozó madarakra jellemző",boxNo:"❌ NEM jellemző rájuk",items:[{text:"Horgas tépőcsőr",correct:true},{text:"Éles karmú fogóláb",correct:true},{text:"Kiváló látás",correct:true},{text:"Szitálórepülés / zuhanórepülés",correct:true},{text:"Kapirgálóláb",correct:false},{text:"Magvakkal táplálkozik",correct:false},{text:"Rejtőszínű tojó tollazata",correct:false},{text:"A tápláléklánc alján állnak",correct:false}],explain:"Ragadozó madarak: tépőcsőr, fogóláb, kiváló látás, szitáló/zuhanórepülés. NEM jellemző: kapirgálóláb, magvak, rejtőszínű tojó, lánc alja."},
         ]
       },
-      {id:6,icon:"🌾",title:"Termesztett növényeink: búza és a kukorica",ready:false,tf:[],quiz:[],fill:[]},
-      {id:7,icon:"🌻",title:"Termesztett növényeink: napraforgó, repce, lucerna",ready:false,tf:[],quiz:[],fill:[]},
+      {id:6,icon:"🌾",title:"Termesztett növényeink: búza és a kukorica",ready:true,
+  tf:[
+    {text:"A búza gyökérzete bojtos mellékgyökérzet.",answer:true,diff:1,explain:"A búza valóban bojtos mellékgyökérzettel rendelkezik, akárcsak a többi pázsitfűféle."},
+    {text:"A búza szára tömör, bél nélküli.",answer:false,diff:1,explain:"A búza szára szalmaszár, azaz üreges, és bütykök merevítik."},
+    {text:"A búza levelei szárölelők és párhuzamos erezetűek.",answer:true,diff:1,explain:"A búza levelei szárát ölelik és párhuzamos erezésűek, ez jellemző a pázsitfűfélékre."},
+    {text:"A búza virágzata kalász.",answer:true,diff:1,explain:"A búza virágzata kalászvirágzat."},
+    {text:"A búza toklásza a termést védi.",answer:false,diff:1,explain:"A toklász a virágokat védi, nem a termést."},
+    {text:"A búzát rovarok porozzák be.",answer:false,diff:1,explain:"A búzát szél porozza be, nem rovarok."},
+    {text:"A búza termése szemtermés.",answer:true,diff:1,explain:"A búza termése szemtermés, amelynél a termésfal és a maghéj összenőtt."},
+    {text:"A kukorica körülbelül 1,2 millió hektáron termesztett növény Magyarországon.",answer:true,diff:2,explain:"A kukorica valóban kb. 1,2 millió hektáron terem Magyarországon."},
+    {text:"A kukorica porzós virágzata a szár középső részén található.",answer:false,diff:2,explain:"A kukorica porzós virágzata (buga) a szár csúcsán helyezkedik el."},
+    {text:"A kukorica termős virágzatát buroklevelek védik.",answer:true,diff:2,explain:"A torzsavirágzatot buroklevelek veszik körül és védik."},
+    {text:"A kukorica egylaki növény.",answer:true,diff:2,explain:"A kukorica egylaki: egy tövön vannak a porzós és a termős virágzatok, de különválva."},
+    {text:"A búzát ősszel vetik.",answer:true,diff:2,explain:"Az őszi búzát valóban ősszel vetik, ezért is hívják őszi búzának."},
+    {text:"A búza aratása kora tavasszal történik.",answer:false,diff:2,explain:"A búzát nyár elején aratják, nem tavasszal."},
+    {text:"A teljes kiőrlésű lisztnél a termésfalat leválasztják a magtól.",answer:false,diff:2,explain:"Teljes kiőrlésű lisztnél a termésfalat és a magot együtt őrlik, ezért rostban gazdag."},
+    {text:"A kukorica bibeszálai hosszan kinyúlnak a buroklevelek közül.",answer:true,diff:2,explain:"A bibeszálak hosszan kinyúlnak, hogy a szél által szállított pollent felfogják."},
+    {text:"A korpa a búzaszemtermés termésfalából keletkezik a malomban.",answer:true,diff:3,explain:"Malomban a termésfalat leválasztják – ez lesz a korpa – a magtól, amelyet lisztté őrölnek."},
+    {text:"A kukorica koronagyökerei a talaj tápanyagainak felvételét végzik.",answer:false,diff:3,explain:"A koronagyökerek elsősorban megtámasztják a magas szárú kukoricát, nem tápanyagfelvevők."},
+    {text:"A búza kalászvirágzata május körül jelenik meg.",answer:true,diff:3,explain:"A búza kalászvirágzata nagyjából május hónapban fejlődik ki."},
+    {text:"A silókukoricát éretten, szárazon aratják és tárolják.",answer:false,diff:3,explain:"A silókukoricát zölden aratják, felaprítva silóban erjesztik és takarmányként etetik."},
+    {text:"A búza hektáronkénti átlagos hozama kb. 5 tonna Magyarországon.",answer:true,diff:3,explain:"A búza átlaghozama valóban kb. 5 t/ha Magyarországon."}
+  ],
+  quiz:[
+    {text:"Melyik jellemző a búza gyökérzetére?",opts:["Bojtos mellékgyökérzet","Mélyre nyúló főgyökér","Koronagyökerek","Gyöktörzs"],correct:0,diff:1,explain:"A búza bojtos mellékgyökérzettel rendelkezik, ami jellemző a pázsitfűfélékre."},
+    {text:"Mi a neve a búza üreges, bütyköktől merevített szárának?",opts:["Szalmaszár","Húsos szár","Gumószár","Fatörzs"],correct:0,diff:1,explain:"A búza szárát szalmaszárnak nevezzük: üreges és bütykök merevítik."},
+    {text:"Milyen virágzata van a búzának?",opts:["Kalászvirágzat","Bugavirágzat","Fészekvirágzat","Fürtvirágzat"],correct:0,diff:1,explain:"A búza virágzata kalászvirágzat."},
+    {text:"Mikor aratják a búzát?",opts:["Nyár elején","Ősszel","Kora tavasszal","Télen"],correct:0,diff:1,explain:"A búzát nyár elején aratják, miután ősszel vetették."},
+    {text:"Mi keletkezik a búzaszemből, amikor a malomban a termésfalat leválasztják?",opts:["Liszt és korpa","Csak liszt","Csak korpa","Keményítő és olaj"],correct:0,diff:2,explain:"A malomban a termésfalat leválasztják (ez lesz a korpa), a magot lisztté őrlik."},
+    {text:"Hol helyezkedik el a kukorica porzós virágzata (buga)?",opts:["A szár csúcsán","A szár tövén","A szár középső részén","A levelek hónaljában"],correct:0,diff:2,explain:"A kukorica porzós virágzata (bugavirágzat) a szár csúcsán van."},
+    {text:"Mekkora a kukorica átlagos hektáronkénti hozama Magyarországon?",opts:["Kb. 7 t/ha","Kb. 2 t/ha","Kb. 5 t/ha","Kb. 10 t/ha"],correct:0,diff:2,explain:"A kukorica átlaghozama kb. 7 t/ha Magyarországon."},
+    {text:"Mi jellemzi a silókukoricát?",opts:["Zölden aratják és felaprítva etetik","Éretten szárítják és darálják","Olaj sajtolására használják","Emberi fogyasztásra kerül"],correct:0,diff:2,explain:"A silókukoricát zölden aratják, felaprítva silóban erjesztik, majd takarmányként etetik."},
+    {text:"Mire szolgálnak a kukorica koronagyökerei?",opts:["A szár megtámasztására","Víz felvételére","Tápanyag raktározására","Szaporodásra"],correct:0,diff:3,explain:"A koronagyökerek elsősorban a magas szárú kukoricát támasztják meg."},
+    {text:"Mi különbözteti meg a teljes kiőrlésű lisztet a fehér liszttől?",opts:["Teljes kiőrlésűnél a termésfalat és a magot együtt őrlik","Teljes kiőrlésűnél csak a magot őrlik","Fehér lisztnél a termésfalat is beleőrlik","Teljes kiőrlésűnél az olajat is kivonják"],correct:0,diff:3,explain:"Teljes kiőrlésű lisztnél a termésfalat és a magot együtt őrlik, ezért rostban gazdagabb."}
+  ],
+  fill:[
+    {diff:1,parts:["A búza gyökérzete ",{id:0}," mellékgyökérzet."],gaps:[{id:0,correct:"bojtos",options:["bojtos","karószerű","koronás","elágazó"]}]},
+    {diff:1,parts:["A búza szárát ",{id:0},"nak nevezzük, mert üreges és bütykök merevítik."],gaps:[{id:0,correct:"szalmaszár",options:["szalmaszár","fatörzs","húsos szár","gumószár"]}]},
+    {diff:1,parts:["A búza virágzata ",{id:0},"."],gaps:[{id:0,correct:"kalászvirágzat",options:["kalászvirágzat","bugavirágzat","fészekvirágzat","fürtvirágzat"]}]},
+    {diff:1,parts:["A búzát ",{id:0}," porozza be."],gaps:[{id:0,correct:"szél",options:["szél","méh","pillangó","bogár"]}]},
+    {diff:1,parts:["A búza termése ",{id:0},", ahol a termésfal és a maghéj összenőtt."],gaps:[{id:0,correct:"szemtermés",options:["szemtermés","bogyó","tok","becő"]}]},
+    {diff:2,parts:["A kukorica porzós virágzatát ",{id:0},"nak nevezzük."],gaps:[{id:0,correct:"bugavirágzat",options:["bugavirágzat","kalászvirágzat","fészekvirágzat","torzsavirágzat"]}]},
+    {diff:2,parts:["A kukorica termős virágzatát buroklevelek védik, neve ",{id:0},"."],gaps:[{id:0,correct:"torzsavirágzat",options:["torzsavirágzat","bugavirágzat","kalászvirágzat","fürtvirágzat"]}]},
+    {diff:2,parts:["A kukorica egy ",{id:0}," növény, mert egy tövön vannak a porzós és termős virágok."],gaps:[{id:0,correct:"egylaki",options:["egylaki","kétlaki","kétszínű","egyszikű"]}]},
+    {diff:3,parts:["Malomban a búza termésfalát leválasztják – ez lesz a ",{id:0}," – a magtól, amelyet lisztté őrölnek."],gaps:[{id:0,correct:"korpa",options:["korpa","dara","keményítő","glutén"]}]},
+    {diff:3,parts:["A silókukoricát ",{id:0}," aratják, felaprítva silóban erjesztik."],gaps:[{id:0,correct:"zölden",options:["zölden","éretten","szárazon","fagyottan"]}]}
+  ],
+  sort:[
+    {diff:2,question:"Sorold fel a búza termesztésének főbb lépéseit helyes időrendi sorrendben!",items:["Aratás nyár elején","Kalászvirágzat megjelenése (május)","Őszi vetés","Lisztté őrlés a malomban","Csírázás és kelés"],correct:[2,4,1,0,3],explain:"A búzát ősszel vetik, csírázás után tavasszal kel, május körül kalászol, nyár elején aratják, majd malomban lisztet készítenek belőle."},
+    {diff:3,question:"Sorold sorrendbe a kukorica fejlődési állomásait a vetéstől a takarmányozásig!",items:["Bugavirágzat megjelenése","Vetés (tavasz)","Beporzás szél által","Torzsán szemek fejlődése","Zöld aratás és silózás"],correct:[1,0,2,3,4],explain:"A kukoricát tavasszal vetik, majd megjelenik a bugavirágzat, szél által beporozzák, a torzsán szemek fejlődnek, végül zölden aratják és silózzák."}
+  ],
+  cat:[
+    {diff:2,question:"Sorold a jellemzőket a megfelelő növényhez!",boxYes:"🌾 Búza",boxNo:"🌽 Kukorica",items:[{text:"Kalászvirágzat",correct:true},{text:"Bugavirágzat a szár csúcsán",correct:false},{text:"Szalmaszár",correct:true},{text:"Torzsavirágzat buroklevelekkel",correct:false},{text:"Őszi vetés",correct:true},{text:"Koronagyökerek megtámasztáshoz",correct:false},{text:"Toklász védi a virágokat",correct:true},{text:"Silózva takarmányként használják",correct:false}],explain:"A kalász, szalmaszár, toklász és őszi vetés a búzára jellemző; a bugavirágzat, torzsavirágzat, koronagyökerek és silózás a kukoricára."},
+    {diff:3,question:"Melyik állítás igaz a búzára (és nem a kukoricára)?",boxYes:"🌾 Csak búzára igaz",boxNo:"🌽 Csak kukoricára igaz",items:[{text:"A termés lisztté őrölhető",correct:true},{text:"Egylaki növény egyivarú virágokkal",correct:false},{text:"Kb. 1 millió hektáron termesztik",correct:true},{text:"A bibeszálak hosszan kinyúlnak",correct:false},{text:"A toklász védi a virágokat",correct:true},{text:"Kb. 1,2 millió hektáron termesztik",correct:false}],explain:"A búzára jellemző: liszt készül belőle, kb. 1 millió hektáron terem, toklász védi a virágokat. A kukoricára: egylaki, hosszú bibeszálak, kb. 1,2 millió hektár."}
+  ]
+},
+      {id:7,icon:"🌻",title:"Termesztett növényeink: napraforgó, repce és lucerna",ready:true,
+  tf:[
+    {text:"A napraforgó eredeti hazája Közép-Amerika és Mexikó.",answer:true,diff:1,explain:"A napraforgó valóban Közép-Amerikából és Mexikóból származik."},
+    {text:"A napraforgó virágzata fészekvirágzat.",answer:true,diff:1,explain:"A napraforgó fészekvirágzatú növény."},
+    {text:"A napraforgó nyelves virágai termést hoznak.",answer:false,diff:1,explain:"A napraforgó nyelves virágai meddők, csak vonzzák a beporzókat. A csöves virágok termékenyülnek meg."},
+    {text:"A repce a káposztafélék családjába tartozik.",answer:true,diff:1,explain:"A repce valóban a káposztafélék (Brassicaceae) családjába tartozik."},
+    {text:"A repce virágzata fürtvirágzat.",answer:true,diff:1,explain:"A repce fürtvirágzatú, és virágai keresztes felépítésűek."},
+    {text:"A lucerna egyéves növény.",answer:false,diff:1,explain:"A lucerna évelő növény, évente többször kaszálható."},
+    {text:"A lucerna gyökérzetében nitrogéngyűjtő baktériumok élnek.",answer:true,diff:1,explain:"A lucerna gyökérgümőiben nitrogéngyűjtő baktériumok élnek, amelyek megkötik a légköri nitrogént."},
+    {text:"A napraforgóból 10 kg magból 2,5-5 kg olaj nyerhető.",answer:true,diff:2,explain:"A napraforgómag olajhozama 10 kg magból kb. 2,5–5 kg olaj."},
+    {text:"A napraforgót India területéről hurcolták be Európába.",answer:false,diff:2,explain:"A napraforgó Közép-Amerikából, Mexikóból származik. Indiából a repce ered."},
+    {text:"A repce termése becőtermés.",answer:true,diff:2,explain:"A repce termése becőtermés, ami a káposztafélékre jellemző."},
+    {text:"A repcét szeptemberben vetik.",answer:true,diff:2,explain:"Az őszi repcét szeptemberben vetik, akárcsak az őszi búzát."},
+    {text:"A lucerna mélyre nyúló főgyökérrel rendelkezik.",answer:true,diff:2,explain:"A lucerna karószerű, mélyre nyúló főgyökérrel rendelkezik, ami száraz területeken is biztosítja a vízellátást."},
+    {text:"A lucerna csak frissen használható takarmányként.",answer:false,diff:2,explain:"A lucernát frissen, szárítva és silózva egyaránt használják takarmányként."},
+    {text:"A napraforgó 16. századi Európában dísznövényként terjedt el.",answer:true,diff:2,explain:"A napraforgót a 16. században dísznövényként vitték Európába, ipari növényként csak a 19. században kezdték termeszteni."},
+    {text:"A repce olajtartalma 30-45% között van.",answer:true,diff:3,explain:"A repcemag olajtartalma 30–45%, ami magas értéket jelent az olajos magvak között."},
+    {text:"A lucerna gyöktörzse tápanyagokat raktároz.",answer:true,diff:3,explain:"A lucerna gyöktörzse tápanyagokat raktároz, ami lehetővé teszi az évelő életmódot és a többszöri kaszálást."},
+    {text:"A napraforgó meszes talajt igényel.",answer:true,diff:3,explain:"A napraforgó meszesebb talajt kedvel sok tápanyaggal együtt."},
+    {text:"A lucerna lejtős dombvidéken talajvédelmi szerepet tölt be.",answer:true,diff:3,explain:"A lucerna mélyre nyúló gyökérzete és évelő jellege miatt lejtős domboldalakon hatékonyan védi a talajt az eróziótól."},
+    {text:"A repce termesztési területe Magyarországon meghaladja az 500 ezer hektárt.",answer:false,diff:3,explain:"A repce termesztési területe Magyarországon kb. 200-250 ezer hektár, nem haladja meg az 500 ezret."},
+    {text:"A napraforgó szárazságtűrő, melegigényes növény.",answer:true,diff:3,explain:"A napraforgó valóban melegigényes és jól tűri a szárazságot, ezért alkalmas a kontinentális éghajlatú területekre."}
+  ],
+  quiz:[
+    {text:"Melyik kontinensről származik a napraforgó?",opts:["Közép-Amerika és Mexikó","India","Afrika","Dél-Európa"],correct:0,diff:1,explain:"A napraforgó eredeti hazája Közép-Amerika és Mexikó."},
+    {text:"Milyen virágzattípusa van a napraforgónak?",opts:["Fészekvirágzat","Fürtvirágzat","Kalászvirágzat","Bugavirágzat"],correct:0,diff:1,explain:"A napraforgó fészekvirágzatú növény, ahol csöves és nyelves virágok helyezkednek el."},
+    {text:"Melyik növény tartozik a káposztafélék (Brassicaceae) családjába?",opts:["Repce","Napraforgó","Lucerna","Búza"],correct:0,diff:1,explain:"A repce a káposztafélék családjába tartozik, virágai keresztesek, termése becőtermés."},
+    {text:"Mire használják a lucernát?",opts:["Takarmánynak (frissen, szárítva, silózva)","Étolaj gyártására","Kenyér sütéséhez","Keményítő előállítására"],correct:0,diff:1,explain:"A lucernát elsősorban takarmányként használják, frissen, szárítva és silózva egyaránt."},
+    {text:"Mikor hurcolták be a napraforgót Európába dísznövényként?",opts:["A 16. században","A 19. században","A 18. században","Az ókorban"],correct:0,diff:2,explain:"A napraforgót a 16. században vitték Európába dísznövényként, és csak a 19. században kezdték ipari növényként termeszteni."},
+    {text:"Mekkora a repce átlagos hektáronkénti hozama?",opts:["Kb. 1,8 t/ha","Kb. 5 t/ha","Kb. 7 t/ha","Kb. 3 t/ha"],correct:0,diff:2,explain:"A repce átlaghozama kb. 1,8 t/ha Magyarországon."},
+    {text:"Mire valók a lucerna gyökérgümői?",opts:["Nitrogéngyűjtő baktériumoknak adnak helyet","Vizet raktároznak szárazságban","Tápanyagot raktároznak télre","Megtámasztják a növényt"],correct:0,diff:2,explain:"A lucerna gyökérgümőiben nitrogéngyűjtő baktériumok élnek, amelyek megkötik a légköri nitrogént."},
+    {text:"Melyik virágai meddők a napraforgóban?",opts:["A nyelves virágok","A csöves virágok","Mindkét virág termékeny","Egyik sem meddő"],correct:0,diff:2,explain:"A napraforgó peremén elhelyezkedő sárga nyelves virágok meddők, csak vonzzák a beporzókat. A csöves virágok hozzák a termést."},
+    {text:"Melyik növény olajtartalma 30-45% közötti?",opts:["Repce","Napraforgó","Lucerna","Kukorica"],correct:0,diff:3,explain:"A repce magjának olajtartalma 30–45% között van."},
+    {text:"Miért alkalmas a lucerna lejtős dombvidéken talajvédelemre?",opts:["Mélyre nyúló főgyökere és évelő jellege védi a talajt az eróziótól","Nagyon magas szárral árnyékolja a talajt","Gyorsan elszaporodik és befedi a talajtakarót","Gyökérgümői megkötik a talajszemcséket"],correct:0,diff:3,explain:"A lucerna mélyre nyúló főgyökere és évelő jellege az, ami a lejtős domboldalakon hatékonyan védi a talajt az eróziótól."}
+  ],
+  fill:[
+    {diff:1,parts:["A napraforgó virágzata ",{id:0},"."],gaps:[{id:0,correct:"fészekvirágzat",options:["fészekvirágzat","kalászvirágzat","bugavirágzat","fürtvirágzat"]}]},
+    {diff:1,parts:["A repce a ",{id:0}," családjába tartozik."],gaps:[{id:0,correct:"káposztafélék",options:["káposztafélék","pillangósok","pázsitfűfélék","fészekvirágzatúak"]}]},
+    {diff:1,parts:["A lucerna ",{id:0}," növény, évente többször kaszálják."],gaps:[{id:0,correct:"évelő",options:["évelő","egyéves","kétéves","télizöld"]}]},
+    {diff:1,parts:["A lucerna gyökérgümőiben ",{id:0}," baktériumok élnek."],gaps:[{id:0,correct:"nitrogéngyűjtő",options:["nitrogéngyűjtő","foszforgyűjtő","talajlazító","szimbionta"]}]},
+    {diff:2,parts:["A napraforgó eredeti hazája ",{id:0},"."],gaps:[{id:0,correct:"Közép-Amerika és Mexikó",options:["Közép-Amerika és Mexikó","India","Kína","Dél-Afrika"]}]},
+    {diff:2,parts:["A repce termése ",{id:0},"."],gaps:[{id:0,correct:"becőtermés",options:["becőtermés","szemtermés","bogyó","toktermés"]}]},
+    {diff:2,parts:["A repcét ",{id:0},"ben vetik."],gaps:[{id:0,correct:"szeptember",options:["szeptember","március","június","november"]}]},
+    {diff:2,parts:["A napraforgó ",{id:0}," virágai meddők és vonzzák a beporzókat."],gaps:[{id:0,correct:"nyelves",options:["nyelves","csöves","porzós","termős"]}]},
+    {diff:3,parts:["A repce magjának olajtartalma ",{id:0},"% közötti."],gaps:[{id:0,correct:"30-45",options:["30-45","10-20","50-60","5-15"]}]},
+    {diff:3,parts:["A lucerna ",{id:0}," raktározza a tápanyagokat, ami lehetővé teszi az évelő életmódot."],gaps:[{id:0,correct:"gyöktörzse",options:["gyöktörzse","gumója","hagymája","levelei"]}]}
+  ],
+  sort:[
+    {diff:2,question:"Sorold helyes sorrendbe a napraforgó európai megjelenésének és elterjedésének állomásait!",items:["Ipari növényként termeszteni kezdik","16. századi felfedezők beviszik Európába","Közép-Amerikában őshonos","Dísznövényként terjedt el Európában","19. századi ipari felhasználás kezdete"],correct:[2,1,3,4,0],explain:"A napraforgó Közép-Amerikában volt őshonos, a 16. századi felfedezők vitték Európába dísznövényként, a 19. századtól ipari növényként termesztik és kezdik el iparilag feldolgozni."},
+    {diff:3,question:"Sorold helyes sorrendbe a lucerna jellemzőit gazdasági fontossága szerint (legfontosabbtól kevésbé fontosig)!",items:["Talajvédelem lejtős domboldalakon","Takarmányozás frissen, szárítva, silózva","Nitrogénmegkötés a gyökérgümőkben","Magas fehérjetartalom","Évente többszöri kaszálás"],correct:[1,3,4,2,0],explain:"A lucerna legfőbb értéke a takarmányként való sokoldalú felhasználás és magas fehérjetartalma, ezenkívül az évenkénti többszöri kaszálás és a nitrogénkötés is fontos, végül a talajvédelem is értékes tulajdonság."}
+  ],
+  cat:[
+    {diff:2,question:"Sorold a jellemzőket a megfelelő növényhez!",boxYes:"🌻 Napraforgó",boxNo:"🌿 Repce/Lucerna",items:[{text:"Fészekvirágzat",correct:true},{text:"Becőtermés",correct:false},{text:"Melegigényes, szárazságtűrő",correct:true},{text:"Nitrogéngyűjtő gyökérgümők",correct:false},{text:"Közép-amerikai őshaza",correct:true},{text:"Fürtvirágzat, keresztes virág",correct:false},{text:"10 kg magból 2,5-5 kg olaj",correct:true},{text:"Évelő, évente többször kaszálható",correct:false}],explain:"A napraforgóra jellemző: fészekvirágzat, melegigény, közép-amerikai eredet, magas olajtartalom. A repcére/lucernára: becőtermés, nitrogéngyűjtés, fürtvirágzat, évelő jelleg."},
+    {diff:3,question:"Melyik állítás igaz a lucernára (és nem a repcére)?",boxYes:"🌿 Csak lucernára igaz",boxNo:"🌾 Csak repcére igaz",items:[{text:"Évelő növény",correct:true},{text:"Szeptemberben vetik",correct:false},{text:"Nitrogéngyűjtő baktériumok a gyökerein",correct:true},{text:"30-45% olajtartalommal bír",correct:false},{text:"Évente többször kaszálható",correct:true},{text:"Becőtermése van",correct:false},{text:"Mélyre nyúló főgyökér száraz területeken is",correct:true},{text:"Káposztafélék családjába tartozik",correct:false}],explain:"A lucernára jellemző az évelő jelleg, nitrogéngyűjtés, többszöri kaszálás, mélyre nyúló főgyökér. A repcére jellemző: szeptemberi vetés, 30-45% olajtartalom, becőtermés, káposztafélék."}
+  ]
+},
     ]
   },
   {
@@ -1115,6 +1230,12 @@ let playerName='', currentBigTopic=null, currentTopic=null, mode='';
 let current=0, score=0, streak=0, bestStreak=0, answered=false;
 let startTime=0, timerInterval=null, elapsedSeconds=0;
 
+function getProgress(){try{return JSON.parse(localStorage.getItem('termeszet_progress')||'{}');}catch(e){return{};}}
+function saveProgress(bigId,subtopicId,pct){var prog=getProgress();if(!prog[bigId])prog[bigId]={};if(!prog[bigId][subtopicId]||pct>(prog[bigId][subtopicId].pct||0)){prog[bigId][subtopicId]={passed:pct>=70,pct:pct};}localStorage.setItem('termeszet_progress',JSON.stringify(prog));}
+function isSubtopicUnlocked(bigId,subtopicId){if(subtopicId<=1)return true;var prog=getProgress();var prev=prog[bigId]&&prog[bigId][subtopicId-1];return !!(prev&&prev.passed);}
+function getLog(){try{return JSON.parse(localStorage.getItem('termeszet_log')||'[]');}catch(e){return[];}}
+function appendLog(entry){var log=getLog();log.push(entry);localStorage.setItem('termeszet_log',JSON.stringify(log));}
+
 function formatTime(s){const m=Math.floor(s/60),sec=s%60;return(m>0?m+' perc ':'')+sec+' mp';}
 function streakLabel(){if(streak===0)return'🔥 0';if(streak>=5)return'🔥🔥 '+streak+'!!!';if(streak>=3)return'🔥 '+streak+'!';return'🔥 '+streak;}
 function diffLabel(d){if(d===1)return['diff-1','🟢 Könnyű'];if(d===2)return['diff-2','🟡 Közepes'];return['diff-3','🔴 Nehéz'];}
@@ -1366,14 +1487,22 @@ function showSubtopics(bigId){
   currentBigTopic=BIG_TOPICS.find(function(bt){return bt.id===bigId;});
   const isWater=bigId==='vizek';
   let rows='';
+  var prog=getProgress();
   currentBigTopic.subtopics.forEach(function(t){
-    const locked=t.ready?'':'locked';
-    const click=t.ready?'onclick="subtopicSelected('+t.id+')"':'';
+    var unlocked=true;
+    var isAccessible=t.ready&&unlocked;
+    const locked=isAccessible?'':'locked';
+    const click=isAccessible?'onclick="subtopicSelected('+t.id+')"':'';
     const wStyle=isWater?'water-style':'';
-    const badge=t.ready?'<span class="ready-badge'+(isWater?' water':'')+'">✅ Elérhető</span>':'<span class="coming-badge">⏳ Hamarosan</span>';
+    var topicProg=prog[bigId]&&prog[bigId][t.id];
+    var badge;
+    if(!t.ready){badge='<span class="coming-badge">⏳ Hamarosan</span>';}
+    else if(!unlocked){badge='<span class="coming-badge">🔒 Teljesítsd az előzőt (70%+)</span>';}
+    else if(topicProg){badge='<span class="ready-badge'+(isWater?' water':'')+'">'+(topicProg.passed?'✅':'📝')+' '+topicProg.pct+'%</span>';}
+    else{badge='<span class="ready-badge'+(isWater?' water':'')+'">✅ Elérhető</span>';}
     rows+='<button class="subtopic-btn '+wStyle+' '+locked+'" '+click+'>'+
       '<span class="snum">'+t.id+'.</span><span class="sicon">'+t.icon+'</span>'+
-      '<span><span class="stitle">'+t.title+'</span><span class="sstatus">'+(t.ready?'20 Ig/H · 10 Kvíz · 10 Lyukas':'Hamarosan')+'</span></span>'+badge+'</button>';
+      '<span><span class="stitle">'+t.title+'</span><span class="sstatus">'+(isAccessible?'20 Ig/H · 10 Kvíz · 10 Lyukas':(!t.ready?'Hamarosan':'🔒 Zárolva'))+'</span></span>'+badge+'</button>';
   });
   document.getElementById('gameArea').innerHTML=
     '<div class="card subtopic-screen'+(isWater?' water-theme':'')+'">'+
@@ -1438,6 +1567,14 @@ function render(){
     else if(pct>=50){emoji='🌱';title='Jó kezdet!';sub='Nézd át újra és biztosan jobban megy!';}
     else{emoji='🌾';title='Még gyakorolni kell!';sub='Olvasd el a tananyagot és próbáld újra!';}
     const modeLabel=mode==='tf'?'Igaz/Hamis':mode==='quiz'?'Kvíz':mode==='fill'?'Lyukas szöveg':mode==='sort'?'Sorrendbe állítás':'Kategorizálás';
+    saveProgress(currentBigTopic.id,currentTopic.id,pct);
+    const passed=pct>=70;
+    const nextTopic=currentBigTopic.subtopics.find(function(t){return t.id===currentTopic.id+1&&t.ready;});
+    const passBanner=passed?
+      '<div class="pass-banner">✅ Továbbléphet a következő altémára! ('+pct+'%)</div>':
+      '<div class="fail-banner">❌ Eredmény: <strong>'+pct+'%</strong><br>A továbbhaladáshoz <strong>70%</strong> szükséges. Próbáld újra!</div>';
+    const nextTopicBtn=(passed&&nextTopic)?
+      '<button class="rbtn green" onclick="subtopicSelected('+nextTopic.id+')">➡️ Következő altéma</button>':'';
     area.innerHTML=
       '<div class="card result-screen">'+
         '<span class="result-emoji">'+emoji+'</span>'+
@@ -1446,12 +1583,14 @@ function render(){
         '<div class="result-sub">'+sub+'</div>'+
         '<div class="result-grid">'+
           '<div class="stat-box"><div class="stat-num">'+score+' / '+total+'</div><div class="stat-lbl">✅ Helyes</div></div>'+
-          '<div class="stat-box"><div class="stat-num">'+pct+'%</div><div class="stat-lbl">📊 Arány</div></div>'+
+          '<div class="stat-box"><div class="stat-num" style="color:'+(passed?'#4ade80':'#fb7185')+'">'+pct+'%</div><div class="stat-lbl">📊 Arány</div></div>'+
           '<div class="stat-box time-stat"><div class="stat-num">'+formatTime(elapsedSeconds)+'</div><div class="stat-lbl">⏱ Idő</div></div>'+
           '<div class="stat-box streak-stat"><div class="stat-num">'+bestStreak+'</div><div class="stat-lbl">🔥 Legjobb sorozat</div></div>'+
         '</div>'+
+        passBanner+
         '<div class="saving-msg" id="savingMsg">⏳ Eredmény mentése...</div>'+
         '<div class="result-btns">'+
+          nextTopicBtn+
           '<button class="rbtn orange" onclick="startGame(\''+mode+'\')">🔄 Újra</button>'+
           '<button class="rbtn green" onclick="showModes('+currentTopic.id+')">📚 Módok</button>'+
           '<button class="rbtn blue" onclick="showBigTopics()">🏠 Főmenü</button>'+
@@ -1471,6 +1610,7 @@ function render(){
       '<div class="q-counter">'+(current+1)+' / '+total+'</div>'+
       '<div class="prog-wrap"><div class="prog-fill" style="width:'+prog+'%"></div></div>'+
       '<div class="score-pill">🌟 '+score+'</div>'+
+      (current>0?'<div class="pct-pill'+(Math.round(score/current*100)<70?' low':'')+'" id="pctPill">'+Math.round(score/current*100)+'%</div>':'')+
       '<div class="streak-pill '+(onFire?'on-fire':'')+'" id="streakPill">'+streakLabel()+'</div>'+
       '<div class="timer-pill" id="timerPill">⏱ '+formatTime(elapsedSeconds)+'</div>'+
     '</div>';
@@ -1569,9 +1709,15 @@ function answerQuiz(i){
 function next(){current++;render();window.scrollTo({top:0,behavior:'smooth'});}
 
 function saveResult(name,bigTopic,subTopic,modeLabel,score,total,time,bestStreak){
+  const pctVal=Math.round(score/total*100);
+  const now=new Date();
+  const dateStr=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0')+'-'+String(now.getDate()).padStart(2,'0');
+  const timeStr=String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+  const entry={name:name,date:dateStr,clockTime:timeStr,timestamp:now.getTime(),bigTopic:bigTopic,subTopic:subTopic,mode:modeLabel,score:score,total:total,pct:pctVal,passed:pctVal>=70,timeSeconds:time,bestStreak:bestStreak};
+  appendLog(entry);
   fetch(SHEET_URL,{
     method:'POST',headers:{'Content-Type':'text/plain'},
-    body:JSON.stringify({name:name,mode:bigTopic+' › '+subTopic+' — '+modeLabel,score:score+' / '+total,time:formatTime(time),bestStreak:bestStreak})
+    body:JSON.stringify({name:name,date:dateStr,ora:timeStr,nagytema:bigTopic,altema:subTopic,mod:modeLabel,helyes:score,osszes:total,pct:pctVal,teljesitett:pctVal>=70?'Igen':'Nem',ido_mp:time,ido:formatTime(time),bestStreak:bestStreak})
   })
   .then(function(r){return r.json();})
   .then(function(){const msg=document.getElementById('savingMsg');if(msg){msg.textContent='✅ Eredmény elmentve!';msg.className='saving-msg ok';}})
@@ -1734,11 +1880,11 @@ function renderCat(area,q,topBar,dClass,dLabel,nextLabel){
       '<div class="cat-boxes">'+
         '<div class="cat-box box-yes" id="catBoxYes">'+
           '<div class="cat-box-title">'+q.boxYes+'</div>'+
-          '<div class="cat-box-items" id="catBoxYesItems"></div>'+
+          '<div class="cat-box-items" id="catBoxYesItems"><div class="cat-box-empty-hint">← Húzd ide a kártyákat</div></div>'+
         '</div>'+
         '<div class="cat-box box-no" id="catBoxNo">'+
           '<div class="cat-box-title">'+q.boxNo+'</div>'+
-          '<div class="cat-box-items" id="catBoxNoItems"></div>'+
+          '<div class="cat-box-items" id="catBoxNoItems"><div class="cat-box-empty-hint">← Húzd ide a kártyákat</div></div>'+
         '</div>'+
       '</div>'+
       '<div class="cat-result" id="catResult"></div>'+
@@ -1753,6 +1899,7 @@ function initCatDrag(){
   let dragEl=null,ghost=null,startX=0,startY=0;
 
   function getDropZone(cx,cy){
+    // Always use bounding rect check — reliable even for empty boxes
     const zones=['catBoxYes','catBoxNo','catPool'];
     for(let i=0;i<zones.length;i++){
       const el=document.getElementById(zones[i]);
@@ -1760,7 +1907,10 @@ function initCatDrag(){
       const r=el.getBoundingClientRect();
       if(cx>=r.left&&cx<=r.right&&cy>=r.top&&cy<=r.bottom)return el;
     }
-    return null;
+    // fallback: hit test
+    const hit=document.elementFromPoint(cx,cy);
+    if(!hit)return null;
+    return hit.closest('#catBoxYes,#catBoxNo,#catPool');
   }
 
   function createGhost(el,cx,cy){
@@ -1791,6 +1941,19 @@ function initCatDrag(){
     el.style.opacity='0.3';
   }
 
+  function updateHints(){
+    ['catBoxYesItems','catBoxNoItems'].forEach(function(id){
+      const box=document.getElementById(id);
+      if(!box)return;
+      const hasCards=box.querySelectorAll('.cat-item').length>0;
+      let hint=box.querySelector('.cat-box-empty-hint');
+      if(hasCards&&hint){hint.remove();}
+      else if(!hasCards&&!hint){
+        const h=document.createElement('div');h.className='cat-box-empty-hint';h.textContent='← Húzd ide a kártyákat';box.appendChild(h);
+      }
+    });
+  }
+
   function onEnd(cx,cy){
     if(!dragEl)return;
     dragEl.style.opacity='';
@@ -1813,15 +1976,68 @@ function initCatDrag(){
       }
     }
     dragEl=null;
+    updateHints();
   }
 
-  // Click/tap cycle fallback
+  // Click/tap cycle fallback — kis választómenü jelenik meg
   function catItemClick(el){
     if(answered)return;
+    // Ha már van aktív popup, zárjuk be
+    const existingPopup=document.getElementById('catClickPopup');
+    if(existingPopup){existingPopup.remove();return;}
+
+    const q=document.querySelector('.card').__catQ||(document.querySelector('.card').__catQ=null);
+    // Lekérjük a boxYes/boxNo feliratát a DOM-ból
+    const yesTitle=document.querySelector('#catBoxYes .cat-box-title');
+    const noTitle=document.querySelector('#catBoxNo .cat-box-title');
+    const yesLabel=yesTitle?yesTitle.textContent:'Igen';
+    const noLabel=noTitle?noTitle.textContent:'Nem';
+
+    const r=el.getBoundingClientRect();
+    const popup=document.createElement('div');
+    popup.id='catClickPopup';
+    popup.style.cssText='position:fixed;z-index:10000;background:rgba(18,18,32,.97);border:1px solid rgba(124,58,237,.5);border-radius:12px;padding:8px;display:flex;flex-direction:column;gap:6px;box-shadow:0 8px 32px rgba(0,0,0,.7);min-width:180px;';
+    // Pozícionálás az elem alá, de ne lógjon ki a képernyőről
+    const top=Math.min(r.bottom+6, window.innerHeight-120);
+    const left=Math.max(8, Math.min(r.left, window.innerWidth-200));
+    popup.style.top=top+'px';
+    popup.style.left=left+'px';
+
+    function makePopupBtn(label, action){
+      const btn=document.createElement('button');
+      btn.textContent=label;
+      btn.style.cssText='font-family:"Space Grotesk",sans-serif;font-size:.82rem;font-weight:600;padding:7px 12px;border-radius:8px;cursor:pointer;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:#e2e8f0;text-align:left;transition:background .15s;';
+      btn.onmouseenter=function(){this.style.background='rgba(124,58,237,.2)';};
+      btn.onmouseleave=function(){this.style.background='rgba(255,255,255,.05)';};
+      btn.onclick=function(ev){ev.stopPropagation();action();popup.remove();};
+      return btn;
+    }
+
     const placed=el.getAttribute('data-placed');
-    if(!placed){document.getElementById('catBoxYesItems').appendChild(el);el.setAttribute('data-placed','yes');}
-    else if(placed==='yes'){document.getElementById('catBoxNoItems').appendChild(el);el.setAttribute('data-placed','no');}
-    else{document.getElementById('catPool').appendChild(el);el.removeAttribute('data-placed');}
+    if(placed!=='yes'){
+      popup.appendChild(makePopupBtn('→ '+yesLabel, function(){
+        document.getElementById('catBoxYesItems').appendChild(el);el.setAttribute('data-placed','yes');updateHints();
+      }));
+    }
+    if(placed!=='no'){
+      popup.appendChild(makePopupBtn('→ '+noLabel, function(){
+        document.getElementById('catBoxNoItems').appendChild(el);el.setAttribute('data-placed','no');updateHints();
+      }));
+    }
+    if(placed){
+      popup.appendChild(makePopupBtn('↩ Vissza a készletbe', function(){
+        document.getElementById('catPool').appendChild(el);el.removeAttribute('data-placed');updateHints();
+      }));
+    }
+
+    document.body.appendChild(popup);
+    // Kattintás máshová → bezárja a popupot
+    setTimeout(function(){
+      document.addEventListener('click',function closePopup(ev){
+        if(!popup.contains(ev.target)){popup.remove();}
+        document.removeEventListener('click',closePopup);
+      });
+    },10);
   }
 
   const container=document.querySelector('.card');
@@ -1836,9 +2052,11 @@ function initCatDrag(){
   document.addEventListener('mouseup',function(e){
     if(dragEl){
       // if barely moved → treat as click
-      const dx=Math.abs(e.clientX-(parseFloat(ghost.style.left)+startX));
-      const dy=Math.abs(e.clientY-(parseFloat(ghost.style.top)+startY));
-      if(dx<6&&dy<6){const el=dragEl;if(ghost){ghost.remove();ghost=null;}dragEl.style.opacity='';dragEl=null;catItemClick(el);return;}
+      if(ghost){
+        const dx=Math.abs(e.clientX-(parseFloat(ghost.style.left)+startX));
+        const dy=Math.abs(e.clientY-(parseFloat(ghost.style.top)+startY));
+        if(dx<6&&dy<6){const el=dragEl;ghost.remove();ghost=null;dragEl.style.opacity='';dragEl=null;catItemClick(el);return;}
+      }
       onEnd(e.clientX,e.clientY);
     }
   });
@@ -1885,6 +2103,7 @@ function checkCat(){
   else{res.className='cat-result show wrong';res.textContent='❌ Nem teljesen. '+q.explain;}
   document.getElementById('nextBtn').classList.add('show');
 }
+
 
 (function(){
   const colors=['#7c3aed','#22c55e','#0ea5e9','#f43f5e','#f59e0b','#3b82f6'];
